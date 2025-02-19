@@ -60,7 +60,10 @@ const select = {
       thisProduct.data=data;
 
       thisProduct.renderInMenu();
+      thisProduct.getElements();
       thisProduct.initAccordion();
+      thisProduct.initOrderForm();
+      thisProduct.processorder();
       console.log(thisProduct);
 
     }
@@ -83,14 +86,22 @@ const select = {
       menuContainer.appendChild(thisProduct.element);
     }
 
+    getElements(){
+      const thisProduct = this;
+
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
+      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
+      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
+      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+    }
+
     initAccordion(){
       const thisProduct=this;
-      //find the clickable trigger ( the element that should react to clicking)
-      const clickableTrigger=thisProduct.element.querySelector(select.menuProduct.clickable);
 
       /* START: add event listener to clickable trigger on event click */
-      if (clickableTrigger){
-        clickableTrigger.addEventListener('click', function(event) {
+      if (thisProduct.accordionTrigger){
+        thisProduct.accordionTrigger.addEventListener('click', function(event) {
           /* prevent default action for event */
           event.preventDefault();
 
@@ -104,6 +115,69 @@ const select = {
           thisProduct.element.classList.toggle(classNames.menuProduct.wrapperActive);
         });
       }
+    }
+
+    initOrderForm(){
+      const thisProduct=this;
+
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisProduct.processorder();
+      });
+
+      for (let input of thisProduct.formInputs){
+        input.addEventListener('change', function(){
+          thisProduct.processorder();
+        })
+      }
+
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault()
+        thisProduct.processorder();
+      })
+    }
+
+    processorder(){
+      const thisProduct=this;
+
+      const formData=utils.serializeFormToObject(thisProduct.form);
+      console.log('formData: ', formData);
+
+      let price=thisProduct.data.price;
+
+      for ( let paramId in thisProduct.data.params){
+        const param=thisProduct.data.params[paramId];
+        console.log(paramId);
+        console.log(param);
+
+        for (let optionId in param.options){
+          const option=param.options[optionId];
+          console.log(optionId);
+          console.log(option);
+
+          const optionSelected=formData[paramId] && formData[paramId].includes(optionId);
+
+          if(optionSelected){
+            if(!option.default){
+              price=price+option.price
+            }
+          } else {
+            if(option.default){
+              price=price-option.price
+            }
+          }
+
+
+
+
+
+
+
+
+
+        }
+      }
+      thisProduct.priceElem.innerHTML=price;
     }
   }
 
