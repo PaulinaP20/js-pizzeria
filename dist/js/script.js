@@ -139,7 +139,7 @@
       const thisProduct=this;
 
       thisProduct.amountWidget=new AmountWidget(thisProduct.dom.amountWidgetElem);
-      console.log(thisProduct.dom.amountWidgetElem);
+      //console.log(thisProduct.dom.amountWidgetElem);
 
       thisProduct.dom.amountWidgetElem.addEventListener('updated',function(){
         thisProduct.processOrder();
@@ -238,7 +238,7 @@
   class AmountWidget {
     constructor (element) {
       const thisWidget=this;
-      console.log(thisWidget);
+      //console.log(thisWidget);
       thisWidget.getElements(element);
       thisWidget.setValue(settings.amountWidget.defaultValue);
 
@@ -250,14 +250,14 @@
       const thisWidget = this;
 
       thisWidget.element = element;
-      console.log(element);
+      //console.log(element);
 
       thisWidget.dom={};
 
       thisWidget.dom.input = thisWidget.element.querySelector(select.widgets.amount.input);
-      console.log(thisWidget.dom.input);
+      //console.log(thisWidget.dom.input);
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
-      console.log(thisWidget.linkDecrease);
+      //console.log(thisWidget.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
 
@@ -265,7 +265,7 @@
       const thisWidget=this;
 
       const newValue=parseInt(value);
-      console.log(value)
+      //console.log(value)
 
      if(thisWidget.dom.input){
       if(thisWidget.value !== newValue && !isNaN(newValue) && newValue>= settings.amountWidget.defaultMin && newValue<=settings.amountWidget.defaultMax){
@@ -278,9 +278,7 @@
       }
      }
 
-      console.log(thisWidget.value)
-
-
+      //console.log(thisWidget.value)
     }
 
     initActions(){
@@ -321,7 +319,7 @@
 
     getElements(element){
       const thisCart=this;
-      console.log(element);
+      //console.log(element);
 
       thisCart.dom={};
 
@@ -336,7 +334,6 @@
       thisCart.dom.toggleTrigger.addEventListener('click', function(){
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       })
-
     }
 
   }
@@ -364,11 +361,11 @@
 
     init: function(){
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
 
       thisApp.initData();
       thisApp.initMenu();
