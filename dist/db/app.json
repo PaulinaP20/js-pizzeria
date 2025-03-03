@@ -3,34 +3,38 @@
     {
       "address": "",
       "phone": "",
-      "totalPrice": 38,
-      "subtotalPrice": 18,
-      "totalNumber": 2,
+      "totalPrice": 47,
+      "subtotalPrice": 27,
+      "totalNumber": 1,
       "deliveryFee": 20,
       "products": [
         {
           "id": "cake",
           "name": "Zio Stefano's Doughnut",
-          "amount": 1,
-          "price": 9,
+          "amount": 3,
+          "price": 27,
           "params": {}
-        },
-        {
-          "id": "breakfast",
-          "name": "Zia Giulia's Breakfast",
-          "amount": 1,
-          "price": 9,
-          "params": {
-            "coffee": {
-              "label": "Coffee type",
-              "options": {
-                "latte": "Latte"
-              }
-            }
-          }
         }
       ],
       "id": 1
+    },
+    {
+      "address": "",
+      "phone": "",
+      "totalPrice": 47,
+      "subtotalPrice": 27,
+      "totalNumber": 1,
+      "deliveryFee": 20,
+      "products": [
+        {
+          "id": "cake",
+          "name": "Zio Stefano's Doughnut",
+          "amount": 3,
+          "price": 27,
+          "params": {}
+        }
+      ],
+      "id": 2
     }
   ],
   "products": [
