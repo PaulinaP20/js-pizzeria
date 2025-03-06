@@ -170,7 +170,18 @@ class Booking {
         thisBooking.dom.tables=thisBooking.dom.wrapper.querySelectorAll(select.widgets.booking.tables);
 
         thisBooking.dom.tableWrapper=thisBooking.dom.wrapper.querySelector(select.widgets.booking.tablesWrapper);
-        console.log(thisBooking.dom.tableWrapper);
+        //console.log(thisBooking.dom.tableWrapper);
+
+        thisBooking.dom.submitButton=thisBooking.dom.wrapper.querySelector(select.widgets.booking.submitButton);
+        //console.log(thisBooking.dom.submitButton);
+
+        thisBooking.dom.phone=thisBooking.dom.wrapper.querySelector(select.widgets.booking.phone);
+        console.log(thisBooking.dom.phone)
+
+        thisBooking.dom.address=thisBooking.dom.wrapper.querySelector(select.widgets.booking.address);
+
+        thisBooking.dom.starters=thisBooking.dom.wrapper.querySelectorAll(select.widgets.booking.starters);
+        //console.log(thisBooking.dom.starters);
 
     }
     initWidgets(){
@@ -178,6 +189,8 @@ class Booking {
 
         thisBooking.peopleAmount=new AmountWidget(thisBooking.dom.peopleAmount);
         thisBooking.hoursAmount=new AmountWidget(thisBooking.dom.hoursAmount);
+
+        console.log(thisBooking.peopleAmount);
 
         thisBooking.dom.peopleAmount.addEventListener('click', function(){});
 
@@ -194,6 +207,61 @@ class Booking {
        thisBooking.dom.tableWrapper.addEventListener('click', function(event){
         thisBooking.initTables(event);
        })
+
+       thisBooking.dom.submitButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisBooking.sendBooking();
+       })
+    }
+
+    sendBooking(){
+        const thisBooking=this;
+
+         //localhost:3131/bookings
+        const urlBooking=settings.db.url+'/'+settings.db.bookings;
+        //console.log(urlBooking);
+
+        console.log(thisBooking.dom.phone.value);
+        console.log(thisBooking.dom.address.value);
+
+        const payload=
+        {
+            "date":thisBooking.date,
+            "hour": utils.numberToHour(thisBooking.hour),
+            "table":parseInt(thisBooking.selectedTable) || null,
+            "duration":thisBooking.hoursAmount.value,
+            "ppl":thisBooking.peopleAmount.value,
+            "starters":[],
+            "phone":thisBooking.dom.phone.value,
+            "address": thisBooking.dom.address.value
+        };
+
+        for (let checkbox of thisBooking.dom.starters){
+            if(checkbox.checked){
+                payload.starters.push(checkbox.value);
+            }
+        }
+
+        const option={
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+            },
+            body:JSON.stringify(payload)
+        };
+
+        fetch(urlBooking, option)
+            .then(function(response){
+                return response.json();
+            }).then (function(parsedResponse){
+                console.log(parsedResponse)
+
+                thisBooking.makebooked(payload.date, payload.hour, payload.duration, payload.table);
+                thisBooking.updateDOM();
+            })
+
+        thisBooking.resetForm();
+
     }
 
 
@@ -201,7 +269,7 @@ class Booking {
         const thisBooking=this;
 
         const clickedElement=event.target;
-        console.log(clickedElement);
+        //console.log(clickedElement);
 
        if (clickedElement.classList.contains('table')){
         const tableId=clickedElement.getAttribute(settings.booking.tableIdAttribute);
@@ -231,6 +299,24 @@ class Booking {
             table.classList.remove(classNames.booking.tableSelected)
         }
         thisBooking.selectedTable=null;
+
+    }
+
+    resetForm(){
+        const thisBooking=this;
+        //console.log('ok')
+
+        thisBooking.dom.phone.value='';
+        thisBooking.dom.address.value='';
+
+        thisBooking.peopleAmount.value=1;
+        thisBooking.hoursAmount.value=1;
+
+        for(let checkbox of thisBooking.dom.starters){
+            checkbox.checked=false;
+        }
+
+        thisBooking.resetSelectedTable();
 
     }
 }

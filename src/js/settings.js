@@ -43,7 +43,11 @@
         peopleAmount: '.people-amount',
         hoursAmount: '.hours-amount',
         tables: '.floor-plan .table',
-        tablesWrapper:'.floor-plan'
+        tablesWrapper:'.floor-plan',
+        submitButton: '.order-confirmation [type="submit"]',
+        phone:'.order-confirmation input[type=tel]',
+        address:'.order-confirmation input[type=text]',
+        starters:'input[type=checkbox]'
       },
       nav: {
         links: '.main-nav a',
