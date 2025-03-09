@@ -114,7 +114,7 @@ import Home from './components/Home.js';
       const thisApp=this;
 
       const homeWrapper=document.querySelector(select.containerOf.home);
-      console.log(homeWrapper)
+      //console.log(homeWrapper)
 
       thisApp.homePage=new Home(homeWrapper);
     },

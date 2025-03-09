@@ -176,7 +176,7 @@ class Booking {
         //console.log(thisBooking.dom.submitButton);
 
         thisBooking.dom.phone=thisBooking.dom.wrapper.querySelector(select.widgets.booking.phone);
-        console.log(thisBooking.dom.phone)
+        //console.log(thisBooking.dom.phone)
 
         thisBooking.dom.address=thisBooking.dom.wrapper.querySelector(select.widgets.booking.address);
 
@@ -190,7 +190,7 @@ class Booking {
         thisBooking.peopleAmount=new AmountWidget(thisBooking.dom.peopleAmount);
         thisBooking.hoursAmount=new AmountWidget(thisBooking.dom.hoursAmount);
 
-        console.log(thisBooking.peopleAmount);
+        //console.log(thisBooking.peopleAmount);
 
         thisBooking.dom.peopleAmount.addEventListener('click', function(){});
 

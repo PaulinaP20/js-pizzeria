@@ -13,10 +13,10 @@ class Home {
         const thisHome=this;
 
         thisHome.dom.forwardToOrder=thisHome.dom.wrapper.querySelector(select.widgets.home.forwardToOrder);
-        console.log(thisHome.dom.forwardToOrder);
 
         thisHome.dom.forwardToBooking=thisHome.dom.wrapper.querySelector(select.widgets.home.forwardToBooking);
     }
+
 
     render(){
         const thisHome=this;
