@@ -3,13 +3,15 @@
     templateOf: {
       menuProduct: '#template-menu-product',
       cartProduct: '#template-cart-product',
-      bookingWidget: '#template-booking-widget'
+      bookingWidget: '#template-booking-widget',
+      homeWidget:'#template-home-page'
     },
     containerOf: {
       menu: '#product-list',
       cart: '#cart',
       pages: '#pages',
-      booking: '.booking-wrapper'
+      booking: '.booking-wrapper',
+      home:'.home-wrapper',
     },
     all: {
       menuProducts: '#product-list > .product',
@@ -48,6 +50,12 @@
         phone:'.order-confirmation input[type=tel]',
         address:'.order-confirmation input[type=text]',
         starters:'input[type=checkbox]'
+      },
+
+      home: {
+        forwardToOrder:'.order-box',
+        forwardToBooking:'.booking-box',
+
       },
       nav: {
         links: '.main-nav a',
@@ -136,5 +144,7 @@
 
     cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
 
-    bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML)
+    bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+
+    homeWidget:Handlebars.compile(document.querySelector(select.templateOf.homeWidget).innerHTML),
   };

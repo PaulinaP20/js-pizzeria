@@ -2,6 +2,7 @@ import {settings, select, classNames} from './settings.js';
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Home from './components/Home.js';
 
   const app = {
     initPages: function(){
@@ -35,8 +36,11 @@ import Booking from './components/Booking.js';
           window.location.hash='#/'+id;
 
         })
-
       }
+      window.addEventListener('hashchange', function () {
+        thisApp.initPages();
+    });
+
     },
     activatePage: function(pageId){
       const thisApp=this;
@@ -106,6 +110,15 @@ import Booking from './components/Booking.js';
       thisApp.booking=new Booking(bookingWrapper);
     },
 
+    initHome:function(){
+      const thisApp=this;
+
+      const homeWrapper=document.querySelector(select.containerOf.home);
+      console.log(homeWrapper)
+
+      thisApp.homePage=new Home(homeWrapper);
+    },
+
     init: function(){
       const thisApp = this;
 
@@ -113,6 +126,7 @@ import Booking from './components/Booking.js';
       thisApp.initData();
       thisApp.initCart();
       thisApp.initBooking();
+      thisApp.initHome();
 
     },
   };

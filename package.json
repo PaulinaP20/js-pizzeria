@@ -51,6 +51,7 @@
         "validate": "^5.2.0"
     },
     "dependencies": {
+        "flickity": "^3.0.0",
         "json-server": "^0.17.4"
     }
 }
